@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import Register from './components/login_register/Register';
+import Register from './components/login_register/LandlordRegister';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Optional, for components like modals or dropdowns
