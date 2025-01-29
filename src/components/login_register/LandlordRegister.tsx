@@ -2,15 +2,29 @@
 import React from 'react'
 import './LandlordRegister.css';
 
+type LandlordRegisterProps = {
+	username: string,
+	password: string,
+	firstName: string,
+	lastName: string,
+	businessName: string,
+	phoneNumber : string,
+	email: string,
+	mailingAddress: string,
+	isRegistered : boolean
+}
 
+export const LandlordRegister = (props: LandlordRegisterProps) => {
 
-const Register = () => {
+	//const handleLandlordRegistration: = () => {
+
+	//}
 
 	return (
 		<div className='addLandlord'>
 			<h2>Landlord or Property Owner?</h2>
 
-			<h3> Please enter all the information below, to create an account for the Landlord Portal.</h3>
+			<p> Please enter all the information below, to create an account for the Landlord Portal.</p>
 			<form className='addLandlordForm'>
 				<div className='landlordInput'>
 					<label htmlFor='name'> Username (required) </label>
