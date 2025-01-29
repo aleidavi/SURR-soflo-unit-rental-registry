@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React from 'react';
 import './LandlordRegister.css';
 
 type LandlordRegisterProps = {
@@ -14,7 +14,7 @@ type LandlordRegisterProps = {
 	isRegistered : boolean
 }
 
-export const LandlordRegister = (props: LandlordRegisterProps) => {
+const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 
 	//const handleLandlordRegistration: = () => {
 
@@ -104,4 +104,4 @@ export const LandlordRegister = (props: LandlordRegisterProps) => {
 	)
 }
 
-export default Register;
+export default LandlordRegister;
