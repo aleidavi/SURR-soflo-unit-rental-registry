@@ -1,31 +1,42 @@
 
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import './LandlordRegister.css';
+import { Link } from 'react-router-dom';
 
-type LandlordRegisterProps = {
-	username: string,
-	password: string,
-	firstName: string,
-	lastName: string,
-	businessName: string,
-	phoneNumber : string,
-	email: string,
-	mailingAddress: string,
-	isRegistered : boolean
+
+
+interface Props {
+	onLandlordCreate: () => void;
+	handleSubmit: (formData: any) => void;
+
 }
 
-const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
+const LandlordRegister: React.FC<Props> = ({ onLandlordCreate, handleSubmit }) => {
 
-	//const handleLandlordRegistration: = () => {
 
-	//}
+	const [formData, setFormData] = useState({});
+
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setFormData({
+			...formData,
+			[event.target.name]: event.target.value
+		});
+	};
+
+	const onHandleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		// CALLBACK FUNCTION handleSubmit() must be defined in APP.tsx 
+		handleSubmit(formData);
+	}
 
 	return (
 		<div className='addLandlord'>
 			<h2>Landlord or Property Owner?</h2>
 
 			<p> Please enter all the information below, to create an account for the Landlord Portal.</p>
-			<form className='addLandlordForm'>
+
+			<form onSubmit={onLandlordCreate} className='addLandlordForm'>
+
 				<div className='landlordInput'>
 					<label htmlFor='name'> Username (required) </label>
 					<input
@@ -33,6 +44,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 						id='name'
 						autoComplete='off'
 						placeholder='Enter username'
+						value=''
 					/>
 
 
@@ -42,6 +54,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 						id='password'
 						autoComplete='off'
 						placeholder='Enter password'
+						value=''
 					/>
 
 					<label htmlFor='name'> First Name (required)  </label>
@@ -50,6 +63,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 						id='firstName'
 						autoComplete='off'
 						placeholder='Enter first name'
+						value=''
 					/>
 
 					<label htmlFor='name'> Last Name (required) </label>
@@ -58,6 +72,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 						id='lastName'
 						autoComplete='off'
 						placeholder='Enter last name'
+						value=''
 					/>
 
 					<label htmlFor='name'> Business Name </label>
@@ -66,6 +81,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 						id='businessName'
 						autoComplete='off'
 						placeholder='Enter business name'
+						value=''
 					/>
 
 					<label htmlFor='name'> Telephone Number </label>
@@ -74,6 +90,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 						id='phoneNumber'
 						autoComplete='off'
 						placeholder='Enter phone number'
+						value=''
 					/>
 
 					<label htmlFor='name'> Email </label>
@@ -82,6 +99,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 						id='email'
 						autoComplete='off'
 						placeholder='Enter email'
+						value=''
 					/>
 
 					<label htmlFor='name'> Mailing Address </label>
@@ -90,6 +108,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 						id='mailingAddress'
 						autoComplete='off'
 						placeholder='Enter mailing address'
+						value=''
 					/>
 
 					<button type="submit" className="btn btn-success">Register</button>
@@ -98,7 +117,7 @@ const LandlordRegister: React.FC = (props: LandlordRegisterProps) => {
 
 			<div className='login'>
 				<p>Already have an account?</p>
-				<button type="submit" className="btn btn-link">Login to your Landlord account now</button>
+				<button onClick={handleChange} type="submit" className="btn btn-link">Login to your Landlord account now</button>
 			</div>
 		</div>
 	)
