@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import './LandlordLogin.css';
 
+// Local storage inside browser -> check reactHooks
+// Cookie saved inside browser
 
-const LandlordLogin: React.FC = () => {
+interface Props {
+	handleLoginSubmit: (formData: any) => void;
+}
+
+
+
+const LandlordLogin: React.FC = ({handleLoginSubmit}) => {
+
+	const kDefaultLoginState = {
+		usernameLogin: '',
+		passwordLogin: '',
+	}
+
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [loginFormData, setLoginFormData] = useState(kDefaultLoginState);
+	
+
+	const handleLoginFormChange = (event: ChangeEvent<HTMLInputElement>) => {
+			const newFormData = {
+				...loginFormData,
+				[event.target.name]: event.target.value
+			}
+			setLoginFormData(newFormData);
+		};
+	
+	const onHandleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		// CALLBACK FUNCTION handleSubmit() must be defined in APP.tsx 
+		handleLoginSubmit(loginFormData);
+	};
+
 	return (
 		<div className='loginLandlord'>
 			<h2>Welcome!
@@ -10,20 +42,25 @@ const LandlordLogin: React.FC = () => {
 			</h2>
 
 			<form className='loginLandlordForm'>
-				<div className='landlordInput'>
-					<label htmlFor='name'> Username (required) </label>
+				<div className='landlordLoginInput'>
+					<label htmlFor='usernameLogin'> Username (required) </label>
 					<input
 						type='text'
-						id='name'
+						id='usernameLogin'
+						name='usernameLogin'
 						autoComplete='off'
 						placeholder='Enter username'
+						value={loginFormData.usernameLogin}
+						onChange={handleLoginFormChange}
 					/>
-					<label htmlFor='name'> Password (required) </label>
+					<label htmlFor='passwordLogin'> Password (required) </label>
 					<input
 						type='password'
-						id='password'
+						id='passwordLogin'
 						autoComplete='off'
 						placeholder='Enter password'
+						value={loginFormData.passwordLogin}
+						onChange={handleLoginFormChange}
 					/>
 
 					<button type="submit" className="btn btn-success">Login</button>

@@ -6,7 +6,6 @@ import './LandlordRegister.css';
 
 interface Props {
 	handleRegistrationSubmit: (formData: any) => void;
-
 }
 
 const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
@@ -25,16 +24,18 @@ const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
 	const [formData, setFormData] = useState(kDefaultFormState);
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setFormData({
+		const newFormData = {
 			...formData,
 			[event.target.name]: event.target.value
-		});
+		}
+		setFormData(newFormData);
 	};
 
 	const onHandleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		// CALLBACK FUNCTION handleSubmit() must be defined in APP.tsx 
 		handleRegistrationSubmit(formData);
+		setFormData(kDefaultFormState);
 	}
 
 	return (
@@ -46,81 +47,89 @@ const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
 			<form onSubmit={onHandleSubmit} className='addLandlordForm'>
 
 				<div className='landlordInput'>
-					<label htmlFor='name'> Username (required) </label>
+					<label htmlFor='username'> Username (required) </label>
 					<input
 						type='text'
-						id='name'
+						id='username'
+						name='username'
 						autoComplete='off'
 						placeholder='Enter username'
-						value=''
+						value={formData.username}
 						onChange={handleChange}
 					/>
 
 
-					<label htmlFor='name'> Password (required) </label>
+					<label htmlFor='password'> Password (required) </label>
 					<input
 						type='password'
 						id='password'
+						name='password'
 						autoComplete='off'
 						placeholder='Enter password'
-						value=''
+						value={formData.password}
 						onChange={handleChange}
 					/>
 
-					<label htmlFor='name'> First Name (required)  </label>
+					<label htmlFor='firstName'> First Name (required)  </label>
 					<input
-						type='firstName'
+						type='text'
 						id='firstName'
+						name='firstName'
 						autoComplete='off'
 						placeholder='Enter first name'
-						value=''
+						value={formData.firstName}
 						onChange={handleChange}
 					/>
 
-					<label htmlFor='name'> Last Name (required) </label>
+					<label htmlFor='lastName'> Last Name (required) </label>
 					<input
-						type='lastName'
+						type='text'
 						id='lastName'
+						name='lastName'
 						autoComplete='off'
 						placeholder='Enter last name'
-						value=''
+						value={formData.lastName}
 						onChange={handleChange}
 					/>
 
-					<label htmlFor='name'> Business Name </label>
+					<label htmlFor='businessName'> Business Name </label>
 					<input
-						type='businessName'
+						type='text'
 						id='businessName'
+						name='businessName'
 						autoComplete='off'
 						placeholder='Enter business name'
-						value=''
+						value={formData.businessName}
 						onChange={handleChange}
 					/>
 
-					<label htmlFor='name'> Telephone Number (required) </label>
+					<label htmlFor='phoneNumber'> Telephone Number (required) </label>
 					<input
-						type='phoneNumber'
+						type='text'
 						id='phoneNumber'
+						name='phoneNumber'
 						autoComplete='off'
 						placeholder='Enter phone number'
-						value=''
+						value={formData.phoneNumber}
 						onChange={handleChange}
 					/>
 
-					<label htmlFor='name'> Email (required) </label>
+					<label htmlFor='email'> Email (required) </label>
 					<input
-						type='email'
+						type='text'
 						id='email'
+						name='email'
 						autoComplete='off'
 						placeholder='Enter email'
-						value=''
+						value={formData.email}
 						onChange={handleChange}
 					/>
 
-					<label htmlFor='name'> Mailing Address (required) </label>
+					<label htmlFor='mailingAddress'> Mailing Address (required) </label>
 					<input
-						type='mailingAddress'
+						type='text'
 						id='mailingAddress'
+						name='mailingAddress'
 						autoComplete='off'
 						placeholder='Enter mailing address'
 						value={formData.mailingAddress}
@@ -128,13 +137,13 @@ const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
 						onChange={handleChange}
 					/>
 
-					<button type="submit" className="btn btn-success">Register</button>
+					<button type="submit" className="btn btn-success" value='Register'>Register</button>
 				</div>
 			</form>
 
 			<div className='login'>
 				<p>Already have an account?</p>
-				<button onClick={handleChange} type="submit" className="btn btn-link">Login to your Landlord account here. </button>
+				<button type="submit" className="btn btn-link" >Login to your Landlord account here. </button>
 			</div>
 		</div>
 	)
