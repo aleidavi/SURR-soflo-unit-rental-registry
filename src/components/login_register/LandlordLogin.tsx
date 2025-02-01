@@ -1,14 +1,13 @@
 import React from 'react';
-
 import './LandlordLogin.css';
-import '../../App.tsx';
 
 
 const LandlordLogin: React.FC = () => {
-
 	return (
 		<div className='loginLandlord'>
-			<h2>Landlord login</h2>
+			<h2>Welcome!
+				Login to your Landlord account.
+			</h2>
 
 			<form className='loginLandlordForm'>
 				<div className='landlordInput'>
@@ -32,11 +31,11 @@ const LandlordLogin: React.FC = () => {
 			</form>
 			<div className='login'>
 				<p>Don't have an account?</p>
-				<button type="submit" className="btn btn-link">Register Landlord account</button>
+				<button type="submit" className="btn btn-link">Register Landlord account here.</button>
 			</div>
 		</div>
 	)
 
 }
 
-export  default LandlordLogin;
+export default LandlordLogin;
