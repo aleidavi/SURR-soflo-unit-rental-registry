@@ -4,7 +4,7 @@ import Header from './components/home_page/Header';
 import LandlordRegister from './components/login_register/LandlordRegister';
 import LandlordLogin from './components/login_register/LandlordLogin';
 import Home from './components/home_page/Home';
-import { Routes, Route, Link } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import axios from 'axios';
@@ -99,21 +99,31 @@ function App() {
 			.catch((e) => console.log(`Error occurring at handleRegistrationSubmit callback func: ${e}`));
 	};
 
+
+	/* USING react-router-dom to render components to specific endpoints! */
+	const router = createBrowserRouter([
+		{
+			path: '/',
+			element: <Home />
+		},
+		{
+			path: '/login',
+			element: <LandlordLogin />
+		},
+		{
+			path: "/register",
+			element: <LandlordRegister handleRegistrationSubmit={handleRegistrationSubmit} />
+		}
+	]);
+
 	return (
 
 		<div className='App'>
 			<Header />
-			<Routes >
-				{/*<Route index element = {<Header></Header>}></Route>*/}
-				<Route path="/" element={<App></App>}></Route>
-				<Route path="/login" element={<LandlordLogin />} />
-				<Route path="/register" element={<LandlordRegister handleRegistrationSubmit={handleRegistrationSubmit}/>} />
-			</Routes>
-			<Home />
+			<RouterProvider router={router} />
 		</div>
 
 	)
-
 };
 
 export default App;

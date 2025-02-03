@@ -1,8 +1,12 @@
 import React, { ChangeEvent, useRef, useState, useEffect } from 'react';
 import './LandlordLogin.css';
 
-// Local storage inside browser -> check reactHooks
-// Cookie saved inside browser
+// Check for username pw in back-end
+// True: Login and move on to Landlord profile page
+// useState() for storing the Landlord profile to identify the landlord's page
+// For logout -> update state to have the isLoggedIn state to be false
+
+// Conditonally rendering a Manage Propperties button -> based on the state's status
 
 interface Props {
 	handleLoginSubmit: (formData: any) => void;

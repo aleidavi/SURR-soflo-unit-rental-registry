@@ -11,8 +11,6 @@ import LandlordRegister from './components/login_register/LandlordRegister.tsx';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
+		<App />
 	</StrictMode>,
 )

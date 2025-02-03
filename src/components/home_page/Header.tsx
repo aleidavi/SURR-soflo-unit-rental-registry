@@ -1,8 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Navbar, Nav, Offcanvas, Button } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
+import { Navbar, Nav, Offcanvas, Container, Button } from 'react-bootstrap';
 //import { LinkContainer } from 'react-router-bootstrap';
 
 
@@ -26,10 +25,10 @@ const  Header: React.FC = () => {
 				  </Offcanvas.Header>
 				  <Offcanvas.Body>
 					<Nav className="justify-content-end flex-grow-1 pe-3">
-					  <Nav.Link href="#home">HOME</Nav.Link>
-					  <Nav.Link href="#register">REGISTER</Nav.Link>
-					  <Nav.Link href="#login">LOGIN</Nav.Link>
-					  <Nav.Link href="#logout">LOGOUT</Nav.Link>
+					  <Nav.Link href="/">HOME</Nav.Link>
+					  <Nav.Link href="/register">REGISTER</Nav.Link>
+					  <Nav.Link href="/login">LOGIN</Nav.Link>
+					  <Nav.Link href="/logout">LOGOUT</Nav.Link>
 					</Nav>
 				  </Offcanvas.Body>
 				</Navbar.Offcanvas>
