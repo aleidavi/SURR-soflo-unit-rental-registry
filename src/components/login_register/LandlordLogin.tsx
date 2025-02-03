@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useRef, useState, useEffect } from 'react';
 import './LandlordLogin.css';
 
 // Local storage inside browser -> check reactHooks
@@ -8,9 +8,7 @@ interface Props {
 	handleLoginSubmit: (formData: any) => void;
 }
 
-
-
-const LandlordLogin: React.FC = ({handleLoginSubmit}) => {
+const LandlordLogin: React.FC = ({ handleLoginSubmit }) => {
 
 	const kDefaultLoginState = {
 		usernameLogin: '',
@@ -19,20 +17,21 @@ const LandlordLogin: React.FC = ({handleLoginSubmit}) => {
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [loginFormData, setLoginFormData] = useState(kDefaultLoginState);
-	
+
 
 	const handleLoginFormChange = (event: ChangeEvent<HTMLInputElement>) => {
-			const newFormData = {
-				...loginFormData,
-				[event.target.name]: event.target.value
-			}
-			setLoginFormData(newFormData);
-		};
-	
+		const newFormData = {
+			...loginFormData,
+			[event.target.name]: event.target.value
+		}
+		setLoginFormData(newFormData);
+	};
+
 	const onHandleLogin = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		// CALLBACK FUNCTION handleSubmit() must be defined in APP.tsx 
 		handleLoginSubmit(loginFormData);
+		setLoginFormData(kDefaultLoginState);
 	};
 
 	return (
@@ -41,7 +40,7 @@ const LandlordLogin: React.FC = ({handleLoginSubmit}) => {
 				Login to your Landlord account.
 			</h2>
 
-			<form className='loginLandlordForm'>
+			<form onSubmit={onHandleLogin} className='loginLandlordForm'>
 				<div className='landlordLoginInput'>
 					<label htmlFor='usernameLogin'> Username (required) </label>
 					<input

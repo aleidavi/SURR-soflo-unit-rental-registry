@@ -1,5 +1,5 @@
 
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import './LandlordRegister.css';
 
 

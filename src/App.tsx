@@ -1,10 +1,10 @@
 
-import { ChangeEvent, useState } from 'react'
-import NavBar from './components/home_page/NavBar';
+import { ChangeEvent, useEffect, useState } from 'react'
+import Header from './components/home_page/Header';
 import LandlordRegister from './components/login_register/LandlordRegister';
 import LandlordLogin from './components/login_register/LandlordLogin';
-import { RouterProvider, createBrowserRouter, Route, Link } from 'react-router-dom';
-import './App.css'
+import Home from './components/home_page/Home';
+import { Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import axios from 'axios';
@@ -32,27 +32,34 @@ interface LoginParams {
 	passwordLogin: string;
 }
 
-const convertFromAPI = (apiData: RegistrationParams) => {
-	const newLandlordData = {
-		username: apiData.username,
-		password: apiData.password,
-		firstName: apiData.first_name || '',
-		lastName: apiData.last_name || '',
-		businessName: apiData.business_name ? apiData.business_name : 'None',
-		phoneNumber: apiData.phone_number || '',
-		email: apiData.email || '',
-		mailingAddress: apiData.mailing_address || '',
-	}
-	delete apiData.first_name;
-	delete apiData.last_name;
-	delete apiData.business_name;
-	delete apiData.phone_number;
-	delete apiData.mailing_address;
+interface APILandlordData {
+	id: number,
+	username: string,
+	password: string,
+	first_name: string;
+	last_name: string;
+	business_name: string;
+	phone_number: string;
+	email: string;
+	mailing_address: string;
+	[key: string]: any; // for other potential properties
+  }
+  
+  const convertFromAPI = (apiData: APILandlordData): RegistrationParams => {
+	return {
+	  firstName: apiData.first_name || '',
+	  lastName: apiData.last_name || '',
+	  username: apiData.username || '',
+	  password: apiData.password || '',
+	  businessName: apiData.business_name ?? 'None',
+	  phoneNumber: apiData.phone_number || '',
+	  email: apiData.email || '',
+	  mailingAddress: apiData.mailing_address || '',
+	};
+  };
+  
 
-	return newLandlordData;
-};
-
-const getAllLandlords = () => {
+const getAllLandlordsAPI = () => {
 	return axios.get(`${kBaseURL}/landlords`)
 	.then(response => {
 		const apiLandlords = response.data;
@@ -69,40 +76,40 @@ const kBaseURL = 'http://127.0.0.1:8000';
 
 
 
-const App: React.FC = () => {
+function App() {
 	const [landlordData, setLandlordData] = useState<RegistrationParams[]>([])
 
-	const handleRegistrationSubmit = (landlordData) => {
-		return axios.post(`${kBaseURL}/landlords`, landlordData)
+
+	const getAllLandlords = () => {
+		getAllLandlordsAPI()
+			.then(landlords => {
+				setLandlordData(landlords);
+			});
+	};
+
+	useEffect(() => {
+		getAllLandlords();
+	}, []);
+
+	const handleRegistrationSubmit = (newLandlordData: RegistrationParams) => {
+		return axios.post(`${kBaseURL}/landlords`, newLandlordData)
 			.then((result) => {
 				setLandlordData((prevLandlords) => [convertFromAPI(result.data), ...prevLandlords]);
 			})
 			.catch((e) => console.log(`Error occurring at handleRegistrationSubmit callback func: ${e}`));
 	};
 
-	/* USING react-router-dom to render components to specific endpoints! */
-	const router = createBrowserRouter([
-		//{
-		//path: '/home',
-		//element: <Home />,
-		//},
-		{
-			path: '/login',
-			element: <LandlordLogin />
-		},
-		{
-			path: "/register",
-			element: <LandlordRegister handleRegistrationSubmit={handleRegistrationSubmit} />
-		}
-	]);
-
 	return (
 
 		<div className='App'>
-			{/*<NavBar/>*/}
-			{/*<RouterProvider router={}></RouterProvider>*/}
-			{/*<LandlordRegister handleSubmit={handleRegistrationSubmit} />*/}
-			<RouterProvider router={router} />
+			<Header />
+			<Routes >
+				{/*<Route index element = {<Header></Header>}></Route>*/}
+				<Route path="/" element={<App></App>}></Route>
+				<Route path="/login" element={<LandlordLogin />} />
+				<Route path="/register" element={<LandlordRegister handleRegistrationSubmit={handleRegistrationSubmit}/>} />
+			</Routes>
+			<Home />
 		</div>
 
 	)
