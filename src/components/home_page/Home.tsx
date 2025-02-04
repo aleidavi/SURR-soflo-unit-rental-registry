@@ -7,8 +7,8 @@ const Home = () => {
   return (
     <Container className="mt-5">
       <Container className="text-center home-container">
-        <h1 className="display-4">Welcome to S U R R!</h1>
-        <h2 className="mb-4">South Florida's Unit Rental Registry</h2>
+        <h2 className="display-4">Welcome to S U R R!</h2>
+        <h3 className="mb-4">South Florida's Unit Rental Registry</h3>
         <p className="lead">
           Landlords and businesses that own and rent properties within the Miami Dade County
           area are required to register or update each property.

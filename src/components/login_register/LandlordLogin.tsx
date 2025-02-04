@@ -45,9 +45,13 @@ const LandlordLogin: React.FC = ({ handleLoginSubmit }) => {
 
 	return (
 		<div className='loginLandlord'>
-			<h2>Welcome!
-				Login to your Landlord account.
-			</h2>
+				<h3>
+					Welcome back!
+				</h3>
+				<h4>
+					Login to your Landlord account.
+				</h4>
+			
 
 			<form onSubmit={onHandleLogin} className='loginLandlordForm'>
 				<div className='landlordLoginInput'>

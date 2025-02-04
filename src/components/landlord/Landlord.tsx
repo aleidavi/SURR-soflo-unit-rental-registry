@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 import axios from 'axios';
 import './Landlord.css';
+import PropertyTable from '../property/PropertyTable';
 
 interface LandlordProps {
 	id: number;
@@ -47,7 +48,7 @@ const Landlord: React.FC<LandlordProps> = ({
 		  <Row className="landlord-profile">
 			<Col>
 			  <h2>Landlord Profile</h2>
-			  <p><strong>Username:</strong> {currentLandlord.username}</p>
+			  <></>
 			  <p><strong>First Name:</strong> {currentLandlord.first_name}</p>
 			  <p><strong>Last Name:</strong> {currentLandlord.last_name}</p>
 			  <p><strong>Business Name:</strong> {currentLandlord.business_name}</p>
@@ -58,7 +59,8 @@ const Landlord: React.FC<LandlordProps> = ({
 		  </Row>
 		  <Row className="property-table">
 			<Col>
-			  <h3>Property Table</h3>
+
+			 <PropertyTable />
 			  
         </Col>
       </Row>

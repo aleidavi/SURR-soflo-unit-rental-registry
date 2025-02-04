@@ -41,7 +41,7 @@ const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
 
 	return (
 		<div className='addLandlord'>
-			<h2>Landlord or Property Owner?</h2>
+			<h3>Landlord or Property Owner?</h3>
 
 			<p> Please enter all the information below, to create an account for the Landlord Portal.</p>
 
