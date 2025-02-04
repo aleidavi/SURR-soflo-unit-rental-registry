@@ -1,5 +1,6 @@
 
 import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { Nav } from 'react-bootstrap';
 import './LandlordRegister.css';
 
 
@@ -19,7 +20,7 @@ const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
 		phoneNumber: '',
 		email: '',
 		mailingAddress: '',
-	}
+	};
 
 	const [formData, setFormData] = useState(kDefaultFormState);
 
@@ -143,7 +144,9 @@ const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
 
 			<div className='login'>
 				<p>Already have an account?</p>
-				<button type="submit" className="btn btn-link" >Login to your Landlord account here. </button>
+				<button type="submit" className="btn btn-link" >
+					<Nav.Link href="/login">Login to your Landlord account here. </Nav.Link>
+				</button>
 			</div>
 		</div>
 	)

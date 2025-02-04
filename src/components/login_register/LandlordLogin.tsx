@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useRef, useState, useEffect } from 'react';
+import { Nav } from 'react-bootstrap';
 import './LandlordLogin.css';
 
 // Check for username pw in back-end
@@ -19,8 +20,10 @@ const LandlordLogin: React.FC = ({ handleLoginSubmit }) => {
 		passwordLogin: '',
 	}
 
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [loginFormData, setLoginFormData] = useState(kDefaultLoginState);
+	const [currentProfile, setProfile] = useState('');
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [errorMessage, setErrorMessage] = useState()
 
 
 	const handleLoginFormChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +37,9 @@ const LandlordLogin: React.FC = ({ handleLoginSubmit }) => {
 	const onHandleLogin = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		// CALLBACK FUNCTION handleSubmit() must be defined in APP.tsx 
-		handleLoginSubmit(loginFormData);
+		handleLogin(loginFormData);
+
+		// Once user is logged in, the login form should be reset to it's default empty state
 		setLoginFormData(kDefaultLoginState);
 	};
 
@@ -71,7 +76,9 @@ const LandlordLogin: React.FC = ({ handleLoginSubmit }) => {
 			</form>
 			<div className='login'>
 				<p>Don't have an account?</p>
-				<button type="submit" className="btn btn-link">Register Landlord account here.</button>
+				<button type="submit" className="btn btn-link">
+					<Nav.Link href="/register">Register Landlord account here. </Nav.Link>
+				</button>
 			</div>
 		</div>
 	)

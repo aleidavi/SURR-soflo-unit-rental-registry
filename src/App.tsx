@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import axios from 'axios';
+import Landlord from './components/landlord/Landlord';
 
 
 
@@ -43,38 +44,37 @@ interface APILandlordData {
 	email: string;
 	mailing_address: string;
 	[key: string]: any; // for other potential properties
-  }
-  
-  const convertFromAPI = (apiData: APILandlordData): RegistrationParams => {
-	return {
-	  firstName: apiData.first_name || '',
-	  lastName: apiData.last_name || '',
-	  username: apiData.username || '',
-	  password: apiData.password || '',
-	  businessName: apiData.business_name ?? 'None',
-	  phoneNumber: apiData.phone_number || '',
-	  email: apiData.email || '',
-	  mailingAddress: apiData.mailing_address || '',
-	};
-  };
-  
-
-const getAllLandlordsAPI = () => {
-	return axios.get(`${kBaseURL}/landlords`)
-	.then(response => {
-		const apiLandlords = response.data;
-		const newLandlords = apiLandlords.map(convertFromAPI);
-		return newLandlords;
-	})
-	.catch(e => {
-		console.log(`This error occurred after getAllLandlords inside App.tsx: ${e}`);
-	})
 }
 
-//const kBaseURL = 'https://surr-92ba55f1fcdd.herokuapp.com';
+const convertFromAPI = (apiData: APILandlordData): RegistrationParams => {
+	console.log(apiData);
+	return {
+		firstName: apiData.first_name,
+		lastName: apiData.last_name,
+		username: apiData.username,
+		password: apiData.password,
+		businessName: apiData.business_name,
+		phoneNumber: apiData.phone_number,
+		email: apiData.email,
+		mailingAddress: apiData.mailing_address,
+	};
+};
+
 const kBaseURL = 'http://127.0.0.1:8000';
 
+const getAllLandlordsAPI = () => {
 
+	return axios.get(`${kBaseURL}/landlords`)
+		.then(response => {
+			console.log(response);
+			const apiLandlords = response.data;
+			const updatedLandlords = apiLandlords.map(convertFromAPI);
+			return updatedLandlords;
+		})
+		.catch(error => {
+			console.log(`Error is coming from getAllLandlordsAPI func: ${error}`)
+		});
+};
 
 function App() {
 	const [landlordData, setLandlordData] = useState<RegistrationParams[]>([])
@@ -82,7 +82,8 @@ function App() {
 
 	const getAllLandlords = () => {
 		getAllLandlordsAPI()
-			.then(landlords => {
+			.then((landlords) => {
+				console.log(landlords);
 				setLandlordData(landlords);
 			});
 	};
@@ -99,6 +100,10 @@ function App() {
 			.catch((e) => console.log(`Error occurring at handleRegistrationSubmit callback func: ${e}`));
 	};
 
+	//const handleLogin = () => {
+	//	pass;
+	//};
+
 
 	/* USING react-router-dom to render components to specific endpoints! */
 	const router = createBrowserRouter([
@@ -113,7 +118,11 @@ function App() {
 		{
 			path: "/register",
 			element: <LandlordRegister handleRegistrationSubmit={handleRegistrationSubmit} />
-		}
+		},
+		{
+			path: "/manage_account",
+			element: <Landlord />
+		},
 	]);
 
 	return (
