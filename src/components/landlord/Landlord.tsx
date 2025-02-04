@@ -7,9 +7,9 @@ interface LandlordProps {
 	id: number;
 	username: string;
 	password: string;
-	firstName: string;
-	lastName: string;
-	businessName: string;
+	first_name: string;
+	last_name: string;
+	business_name: string;
 	phoneNumber: string;
 	email: string;
 	mailingAddress: string;
@@ -18,17 +18,7 @@ interface LandlordProps {
 }
 
 const Landlord: React.FC<LandlordProps> = ({
-	id,
-	username,
-	password,
-	firstName,
-	lastName,
-	businessName,
-	phoneNumber,
-	email,
-	mailingAddress,
-	properties,
-	updateLandlordData,
+	
 }) => {
 	const [currentLandlord, setCurrentLandlord] = useState<LandlordProps | null>(null);
 
@@ -52,9 +42,10 @@ const Landlord: React.FC<LandlordProps> = ({
 	}
 
 	return (
+		
+		<>
 		<div className="landlord-profile">
 			<h2>Landlord Dashboard</h2>
-			<p><strong>Username:</strong> {currentLandlord.username}</p>
 			<p><strong>First Name:</strong> {currentLandlord.first_name}</p>
 			<p><strong>Last Name:</strong> {currentLandlord.last_name}</p>
 			<p><strong>Business Name:</strong> {currentLandlord.business_name} </p>
@@ -63,6 +54,13 @@ const Landlord: React.FC<LandlordProps> = ({
 			<p><strong>Mailing Address:</strong> {currentLandlord.mailing_address}</p>
 			{/* Display properties if needed */}
 		</div>
+
+		<div className="property-table">
+			<h3>Property Table</h3>
+
+		</div>
+		</>
+
 	);
 };
 

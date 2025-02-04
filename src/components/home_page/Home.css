@@ -1,0 +1,15 @@
+
+.home-container {
+	background-color: rgba(0, 128, 0, 0.25); /* Light green background color */
+	padding: 2rem;
+	border-radius: 0.5rem;
+  }
+  
+  .lead {
+	font-size: 1.25rem; /* Larger font size for lead text */
+  }
+  
+  img {
+	max-width: 100%; /* Ensure the image is responsive */
+	height: auto;
+  }

@@ -64,7 +64,7 @@ const kBaseURL = 'http://127.0.0.1:8000';
 
 const getAllLandlordsAPI = () => {
 
-	return axios.get(`${kBaseURL}/landlords`)
+	return axios.get(`${kBaseURL}/landlords/`)
 		.then(response => {
 			console.log(response);
 			const apiLandlords = response.data;
