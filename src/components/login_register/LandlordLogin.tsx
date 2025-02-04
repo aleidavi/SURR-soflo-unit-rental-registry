@@ -74,6 +74,7 @@ const LandlordLogin: React.FC<Props> = ({ handleLogin }) => {
 					<input
 						type='password'
 						id='passwordLogin'
+						name='passwordLogin'
 						autoComplete='off'
 						placeholder='Enter password'
 						value={loginFormData.passwordLogin}
@@ -98,7 +99,6 @@ const LandlordLogin: React.FC<Props> = ({ handleLogin }) => {
 			</div>
 		</div>
 	)
-
 }
 
 export default LandlordLogin;

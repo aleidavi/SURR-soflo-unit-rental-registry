@@ -7,10 +7,10 @@ import axios from 'axios';
 
 
 const Property = () => {
-  return ( <div	 className="property-container">
-	Property
+	return (<div className="property-container">
+		Property
 	</div>
-  )
+	)
 };
 
 export default Property;

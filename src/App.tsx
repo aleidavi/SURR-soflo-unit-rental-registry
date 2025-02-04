@@ -154,7 +154,8 @@ function App() {
 		},
 		{
 			path: "/manage_account",
-			element: isLoggedIn? <Landlord {...currentLandlord} /> : <Home />
+			//element: isLoggedIn? <Landlord {...currentLandlord} /> : <Home />
+			element: <Landlord></Landlord>
 		},
 	]);
 
