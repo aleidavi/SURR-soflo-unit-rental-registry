@@ -13,17 +13,22 @@ interface Props {
 	handleLoginSubmit: (formData: any) => void;
 }
 
-const LandlordLogin: React.FC = ({ handleLoginSubmit }) => {
+interface LoginParams {
+	usernameLogin: string;
+	passwordLogin: string;
+}
+
+const LandlordLogin: React.FC<Props> = ({ handleLogin }) => {
 
 	const kDefaultLoginState = {
 		usernameLogin: '',
 		passwordLogin: '',
 	}
 
-	const [loginFormData, setLoginFormData] = useState(kDefaultLoginState);
+	const [loginFormData, setLoginFormData] = useState<LoginParams>(kDefaultLoginState);
 	const [currentProfile, setProfile] = useState('');
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [errorMessage, setErrorMessage] = useState()
+	const [error, setError] = useState<string | null>(null);
 
 
 	const handleLoginFormChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +41,7 @@ const LandlordLogin: React.FC = ({ handleLoginSubmit }) => {
 
 	const onHandleLogin = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		// CALLBACK FUNCTION handleSubmit() must be defined in APP.tsx 
+		// CALLBACK FUNCTION handleSubmit() must be defined in App.tsx 
 		handleLogin(loginFormData);
 
 		// Once user is logged in, the login form should be reset to it's default empty state
@@ -78,6 +83,13 @@ const LandlordLogin: React.FC = ({ handleLoginSubmit }) => {
 					<button type="submit" className="btn btn-success">Login</button>
 				</div>
 			</form>
+
+			{error && 
+				<div className="error">
+					{error}
+				</div>
+			}
+
 			<div className='login'>
 				<p>Don't have an account?</p>
 				<button type="submit" className="btn btn-link">

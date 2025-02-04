@@ -33,6 +33,14 @@ interface LoginParams {
 	passwordLogin: string;
 }
 
+
+interface Props {
+
+	handleLogin: (loginData: LoginParams) => void;
+  
+  }
+  
+
 interface APILandlordData {
 	id: number,
 	username: string,
@@ -62,8 +70,8 @@ const convertFromAPI = (apiData: APILandlordData): RegistrationParams => {
 
 const kBaseURL = 'http://127.0.0.1:8000';
 
+// For setting all Landlords Data:
 const getAllLandlordsAPI = () => {
-
 	return axios.get(`${kBaseURL}/landlords/`)
 		.then(response => {
 			console.log(response);
@@ -76,8 +84,20 @@ const getAllLandlordsAPI = () => {
 		});
 };
 
+// For completing patching data of a Landlord's Properties:
+// Heavily nested -> must provide the landlords_id, and property_id
+const updatePropertyAPI = (landlord_id, property_id) => {
+	return axios.patch(`${kBaseURL}/landlords/${landlord_id}/properties/${property_id}`)
+		.then(response => {
+			const updated = convertFromAPI(response.data);
+		})
+}
+
+
 function App() {
 	const [landlordData, setLandlordData] = useState<RegistrationParams[]>([])
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [currentLandlord, setCurrentLandlord] = useState<RegistrationParams | null>(null);
 
 
 	const getAllLandlords = () => {
@@ -100,9 +120,22 @@ function App() {
 			.catch((e) => console.log(`Error occurring at handleRegistrationSubmit callback func: ${e}`));
 	};
 
-	//const handleLogin = () => {
-	//	pass;
-	//};
+
+
+	const handleLogin = (loginData: LoginParams) =>	{
+		const foundLandlord = landlordData.find((landlord) => 
+			
+			landlord.username === loginData.usernameLogin &&
+			landlord.password === loginData.passwordLogin
+		);
+		
+		if (foundLandlord) {
+			setIsLoggedIn(true);
+			setCurrentLandlord(foundLandlord);
+		} else {
+			console.log('Invalid username or password.')
+		}
+	};
 
 
 	/* USING react-router-dom to render components to specific endpoints! */
@@ -113,7 +146,7 @@ function App() {
 		},
 		{
 			path: '/login',
-			element: <LandlordLogin />
+			element: <LandlordLogin handleLogin={handleLogin}/>
 		},
 		{
 			path: "/register",
@@ -121,7 +154,7 @@ function App() {
 		},
 		{
 			path: "/manage_account",
-			element: <Landlord />
+			element: isLoggedIn? <Landlord {...currentLandlord} /> : <Home />
 		},
 	]);
 
