@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Table } from 'react-bootstrap';
 import axios from 'axios';
 import './Landlord.css';
 
@@ -10,9 +11,9 @@ interface LandlordProps {
 	first_name: string;
 	last_name: string;
 	business_name: string;
-	phoneNumber: string;
+	phone_number: string;
 	email: string;
-	mailingAddress: string;
+	mailing_address: string;
 	properties: any[];
 	updateLandlordData: (data: any) => void;
 }
@@ -42,26 +43,27 @@ const Landlord: React.FC<LandlordProps> = ({
 	}
 
 	return (
-		
-		<>
-		<div className="landlord-profile">
-			<h2>Landlord Dashboard</h2>
-			<p><strong>First Name:</strong> {currentLandlord.first_name}</p>
-			<p><strong>Last Name:</strong> {currentLandlord.last_name}</p>
-			<p><strong>Business Name:</strong> {currentLandlord.business_name} </p>
-			<p><strong>Phone Number:</strong> {currentLandlord.phone_number}</p>
-			<p><strong>Email:</strong> {currentLandlord.email}</p>
-			<p><strong>Mailing Address:</strong> {currentLandlord.mailing_address}</p>
-			{/* Display properties if needed */}
-		</div>
-
-		<div className="property-table">
-			<h3>Property Table</h3>
-
-		</div>
-		</>
-
-	);
+		<Container>
+		  <Row className="landlord-profile">
+			<Col>
+			  <h2>Landlord Profile</h2>
+			  <p><strong>Username:</strong> {currentLandlord.username}</p>
+			  <p><strong>First Name:</strong> {currentLandlord.first_name}</p>
+			  <p><strong>Last Name:</strong> {currentLandlord.last_name}</p>
+			  <p><strong>Business Name:</strong> {currentLandlord.business_name}</p>
+			  <p><strong>Phone Number:</strong> {currentLandlord.phone_number}</p>
+			  <p><strong>Email:</strong> {currentLandlord.email}</p>
+			  <p><strong>Mailing Address:</strong> {currentLandlord.mailing_address}</p>
+			</Col>
+		  </Row>
+		  <Row className="property-table">
+			<Col>
+			  <h3>Property Table</h3>
+			  
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default Landlord;

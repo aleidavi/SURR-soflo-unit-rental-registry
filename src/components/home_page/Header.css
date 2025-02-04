@@ -1,6 +1,6 @@
 
 
-.bg-body-tertiary {
+.bg-body-tertiary.mb-3 {
 
 	font-style: italic;
 	background-color: rgba(0, 128, 0, 0.25); /* Light green background color */

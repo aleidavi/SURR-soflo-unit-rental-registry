@@ -1,0 +1,12 @@
+.landlord-profile {
+	background-color: rgba(0, 128, 0, 0.25); /* Light green background color */
+	padding: 2rem;
+	border-radius: 0.5rem;
+	margin-bottom: 2rem;
+  }
+  
+  .property-table {
+	background-color: #f8f9fa; /* Light background color */
+	padding: 2rem;
+	border-radius: 0.5rem;
+  }

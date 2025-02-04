@@ -7,8 +7,9 @@ import axios from 'axios';
 
 
 const Property = () => {
-  return (
-	<div>Property</div>
+  return ( <div	 className="property-container">
+	Property
+	</div>
   )
 };
 
