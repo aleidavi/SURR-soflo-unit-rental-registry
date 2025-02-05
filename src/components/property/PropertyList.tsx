@@ -4,8 +4,20 @@ import '../../App.tsx';
 import './PropertyList.css';
 import Property from './Property.tsx';
 
+interface PropertyData {
+	id: number;
+	address: string;
+	unitQuantity: number;
+	propertyType: string;
+	monthlyRent: number;
+	lastIncreaseDate: string;
+	rentIncreasePercentage: number;
+	occupancyStartDate: string;
+	occupancyStatus: string;
+}
+
 interface PropertyListProps {
-	propertiesData: Array<any>;
+	propertiesData: Array<PropertyData>;
 	onDeleteProperty: (id: number) => void;
 }
 
@@ -20,21 +32,21 @@ const PropertyList: React.FC<PropertyListProps> = ({ propertiesData, onDeletePro
 				key={property.id}
 				id={property.id}
 				address={property.address}
-				unit_quantity={property.unit_quantity}
-				property_type={property.property_type}
-				monthly_rent={property.monthly_rent}
-				last_increase_date={property.last_increase_date}
-				rent_increase_percentage={property.rent_increase_percentage}
-				occupancy_start_date={property.occupancy_start_date}
-				occupancy_status={property.occupancy_status}
+				unitQuantity={property.unitQuantity}
+				propertyType={property.propertyType}
+				monthlyRent={property.monthlyRent}
+				lastIncreaseDate={property.lastIncreaseDate}
+				rentIncreasePercentage={property.rentIncreasePercentage}
+				occupancyStartDate={property.occupancyStartDate}
+				occupancyStatus={property.occupancyStatus}
 				onDeleteProperty={onDeleteProperty}
 			/>
 		)
-	})
+	});
 	return (
-		<div className="table-container">
+		<ul className="table-container">
 			{propertyComponents}
-		</div>
+		</ul>
 	)
 }
 

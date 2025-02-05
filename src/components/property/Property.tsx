@@ -7,30 +7,31 @@ import axios from 'axios';
 interface PropertyProps {
 	id: number;
 	address: string;
-	unit_quantity: number;
-	property_type: string;
-	monthly_rent: number;
-	last_increase_date: string,
-	rent_increase_percentage: number;
-	occupancy_start_date: string;
-	occupancy_status: string;
+	unitQuantity: number;
+	propertyType: string;
+	monthlyRent: number;
+	lastIncreaseDate: string,
+	rentIncreasePercentage: number;
+	occupancyStartDate: string;
+	occupancyStatus: string;
 	onDeleteClick: (id: number) => void; // Add onDelete prop
 }
 
 const Property: React.FC<PropertyProps> = ({
 	id,
 	address,
-	unit_quantity,
-	property_type,
-	monthly_rent,
-	last_increase_date,
-	rent_increase_percentage,
-	occupancy_start_date,
-	occupancy_status,
-}) => {
+	unitQuantity,
+	propertyType,
+	monthlyRent,
+	lastIncreaseDate,
+	rentIncreasePercentage,
+	occupancyStartDate,
+	occupancyStatus,
+	onDeleteClick
+	}) => {
 
-	const onDeleteClick = () => {
-		onDeleteProperty(id);
+	const handleDelete = () => {
+		onDeleteClick(id);
 	};
 
 	return (
@@ -39,7 +40,7 @@ const Property: React.FC<PropertyProps> = ({
 			<Card.Header>
 				<div className="d-flex justify-content-between align-items-center">
 					<span>Property ID: {id}</span>
-					<Button variant="danger" size="sm" onClick={onDeleteClick}>
+					<Button variant="danger" size="sm" onClick={handleDelete}>
 						&times;
 					</Button>
 				</div>
@@ -52,31 +53,31 @@ const Property: React.FC<PropertyProps> = ({
 				</Card.Text>
 
 				<Card.Text>
-					<strong>Unit Quantity</strong> {unit_quantity}
+					<strong>Unit Quantity</strong> {unitQuantity}
 				</Card.Text>
 
 				<Card.Text>
-					<strong>Property Type </strong> {property_type}
+					<strong>Property Type </strong> {propertyType}
 				</Card.Text>
 
 				<Card.Text>
-					<strong>Occupancy Status</strong> {occupancy_status}
+					<strong>Occupancy Status</strong> {occupancyStatus}
 				</Card.Text>
 
 				<Card.Text>
-					<strong>Monthly Rent </strong> {monthly_rent}
+					<strong>Monthly Rent </strong> {monthlyRent}
 				</Card.Text>
 
 				<Card.Text>
-					<strong>Last Increase Date</strong> {last_increase_date}
+					<strong>Last Increase Date</strong> {lastIncreaseDate}
 				</Card.Text>
 
 				<Card.Text>
-					<strong>Increase Percentage (%)</strong> {rent_increase_percentage}
+					<strong>Increase Percentage (%)</strong> {rentIncreasePercentage}
 				</Card.Text>
 
 				<Card.Text>
-					<strong>Occupancy Start Date</strong> {occupancy_start_date}
+					<strong>Occupancy Start Date</strong> {occupancyStartDate}
 				</Card.Text>
 
 
