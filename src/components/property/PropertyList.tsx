@@ -1,48 +1,41 @@
 import React, { useState } from 'react';
-import {Table} from 'react-bootstrap';
+import { } from 'react-bootstrap';
 import '../../App.tsx';
-import './PropertyTable.css';
+import './PropertyList.css';
+import Property from './Property.tsx';
 
-
-
-const PropertyTable: React.FC<PropertyTableProps> = ({landlordProperties}) => {
-
-	//const [landlordProperties, setLandlordProperties] = useState()
-
-  return (
-	<div className="table-container">
-		<h4>Properties Table</h4>
-		<Table>
-			<thead>
-				<tr>Property ID</tr>
-				<tr>Address</tr>
-				<tr>Unit Quantity</tr>
-				<tr>Property Type</tr>
-				<tr>Monthly Rent</tr>
-				<tr>Last Increase Date</tr>
-				<tr>Rent Increase Percentage</tr>
-				<tr>Occupancy Start Date</tr>
-
-			</thead>
-			<tbody>
-				{landlordProperties.map((property, index) => (
-					<tr key={index}>
-					<td>{property.id}</td>
-					<td>{property.address}</td>
-					<td>{property.unit_quantity}</td>
-					<td>{property.property_type}</td>
-					<td>{property.monthly_rent}</td>
-					<td>{property.last_increase_date}</td>
-					
-				  </tr>
-
-				))}
-
-			</tbody>
-
-		</Table>
-	</div>
-  )
+interface PropertyListProps {
+	propertiesData: Array<any>;
+	onDeleteProperty: (id: number) => void;
 }
 
-export default PropertyTable;
+
+
+const PropertyList: React.FC<PropertyListProps> = ({ propertiesData, onDeleteProperty }) => {
+
+	const propertyComponents = propertiesData.map((property) => {
+
+		return (
+			<Property
+				key={property.id}
+				id={property.id}
+				address={property.address}
+				unit_quantity={property.unit_quantity}
+				property_type={property.property_type}
+				monthly_rent={property.monthly_rent}
+				last_increase_date={property.last_increase_date}
+				rent_increase_percentage={property.rent_increase_percentage}
+				occupancy_start_date={property.occupancy_start_date}
+				occupancy_status={property.occupancy_status}
+				onDeleteProperty={onDeleteProperty}
+			/>
+		)
+	})
+	return (
+		<div className="table-container">
+			{propertyComponents}
+		</div>
+	)
+}
+
+export default PropertyList;

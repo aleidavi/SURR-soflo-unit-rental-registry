@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 import axios from 'axios';
 import './Landlord.css';
-import PropertyTable from '../property/PropertyList';
+import PropertyList from '../property/PropertyList';
+import Property from '../property/Property';
 
 interface LandlordProps {
 	id: number;
@@ -37,14 +38,14 @@ const Landlord: React.FC<LandlordProps> = ({
 			.catch(error => {
 				console.error('Error fetching landlord data:', error);
 			});
-		
+
 		axios.get(`${kBaseURL}/landlords/${currentLandlordId}/properties`)
-		.then(response => {
-			setLandlordProperties(response.data);
-		})
-		.catch(error => {
-			console.error('Error fetching properties data:', error);
-		});
+			.then(response => {
+				setLandlordProperties(response.data);
+			})
+			.catch(error => {
+				console.error('Error fetching properties data:', error);
+			});
 	}, []);
 
 
@@ -54,32 +55,35 @@ const Landlord: React.FC<LandlordProps> = ({
 
 
 
+
 	return (
 		<Container>
-		  <Row className="landlord-profile">
-			<Col>
-			  <h4>Landlord Profile</h4>
-			  <></>
-			  <p><strong>First Name:</strong> {currentLandlordId.first_name}</p>
-			  <p><strong>Last Name:</strong> {currentLandlordId.last_name}</p>
-			  <p><strong>Business Name:</strong> {currentLandlordId.business_name === null? 'None': currentLandlordId.business_name}</p>
-			  <p><strong>Phone Number:</strong> {currentLandlordId.phone_number}</p>
-			  <p><strong>Email:</strong> {currentLandlordId.email}</p>
-			  <p><strong>Mailing Address:</strong> {currentLandlordId.mailing_address}</p>
-			</Col>
-		  </Row>
-		  <Row className="property-table">
-			<Col>
+			<Row className="landlord-profile">
+				<Col>
+					<h4>Landlord Profile</h4>
+					<></>
+					<p><strong>First Name:</strong> {currentLandlordId.first_name}</p>
+					<p><strong>Last Name:</strong> {currentLandlordId.last_name}</p>
+					<p><strong>Business Name:</strong> {currentLandlordId.business_name === null ? 'None' : currentLandlordId.business_name}</p>
+					<p><strong>Phone Number:</strong> {currentLandlordId.phone_number}</p>
+					<p><strong>Email:</strong> {currentLandlordId.email}</p>
+					<p><strong>Mailing Address:</strong> {currentLandlordId.mailing_address}</p>
+				</Col>
+			</Row>
+			<Row className="property-list">
+				<h4> Property List</h4>
+				<Col>
+					<PropertyList>
+						propertiesData = {landlordProperties}
+						onDeleteProperty = {handleDeleteProperty}
+					</PropertyList>
 
-			 <PropertyTable 
-				currentLandlordId = {currentLandlordId}
-				landlordProperties={landlordProperties}
-			 />
-			  
-        </Col>
-      </Row>
-    </Container>
-  );
+				</Col>
+			</Row>
+
+		</Container>
+
+	);
 };
 
 export default Landlord;
