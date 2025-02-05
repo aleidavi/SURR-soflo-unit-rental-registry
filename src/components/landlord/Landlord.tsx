@@ -72,8 +72,8 @@ const Landlord: React.FC<LandlordProps> = () => {
 		return newProperty;
 	};
 
-	const getLandlordPropertiesAPI = useCallback(() => {
-		axios.get(`${kBaseURL}/landlords/1/properties`)
+	const getLandlordPropertiesAPI = () => {
+		return axios.get(`${kBaseURL}/landlords/1/properties`) 
 				.then(response => {
 					console.log(response.data);
 					const apiProperties = response.data;
@@ -84,27 +84,28 @@ const Landlord: React.FC<LandlordProps> = () => {
 					console.error('Error fetching properties data:', error);
 					return [];
 				});
-	}, []);
+	};
 
-	const getAllProperties = useCallback(() => {
+	const getAllProperties = () => {
 		getLandlordPropertiesAPI()
 			.then((properties: Property[]) => {
+				console.log(properties)
 				setLandlordProperties(properties);
 			});
-	}, [getLandlordPropertiesAPI]);
+	};
 
 	useEffect(() => {
 		// Replace with the actual ID you want to use for demonstration purposes
 		getCurrentLandlord();
 		getAllProperties();
-	}, []);
+	}, [getCurrentLandlord, getAllProperties]);
 
 
 	if (!currentLandlordId) {
 		return <div>Loading...</div>;
 	}
 
-	const onDeleteProperty = (propertyId: number) => {
+	const onDeleteProperty = useCallback((propertyId: number) => {
 		return axios.delete(`${kBaseURL}/landlords/${currentLandlordId}/properties/${propertyId}`)
 			.then(()=> {
 				setLandlordProperties(landlordProperties => landlordProperties.filter(property => {
@@ -114,7 +115,7 @@ const Landlord: React.FC<LandlordProps> = () => {
 			.catch(error => {
                 console.error('Error deleting property:', error);
             });
-    };
+    }, [currentLandlordId]);
 
 
 	return (
@@ -134,10 +135,10 @@ const Landlord: React.FC<LandlordProps> = () => {
 			<Row className="property-list">
 				<h4> Property List</h4>
 				<Col>
-					<PropertyList>
-						propertiesData = {landlordProperties}
-						onDeleteProperty = {onDeleteProperty}
-					</PropertyList>
+					<PropertyList
+						propertiesData={landlordProperties}
+						onDeleteProperty={onDeleteProperty}
+					/>
 
 				</Col>
 			</Row>

@@ -35,11 +35,9 @@ interface LoginParams {
 
 
 interface Props {
-
 	handleLogin: (loginData: LoginParams) => void;
-  
-  }
-  
+}
+
 
 interface APILandlordData {
 	id: number,
@@ -122,13 +120,13 @@ function App() {
 
 
 
-	const handleLogin = (loginData: LoginParams) =>	{
-		const foundLandlord = landlordData.find((landlord) => 
-			
+	const handleLogin = (loginData: LoginParams) => {
+		const foundLandlord = landlordData.find((landlord) =>
+
 			landlord.username === loginData.usernameLogin &&
 			landlord.password === loginData.passwordLogin
 		);
-		
+
 		if (foundLandlord) {
 			setIsLoggedIn(true);
 			setCurrentLandlord(foundLandlord);
@@ -146,7 +144,7 @@ function App() {
 		},
 		{
 			path: '/login',
-			element: <LandlordLogin handleLogin={handleLogin}/>
+			element: <LandlordLogin handleLogin={handleLogin} />
 		},
 		{
 			path: "/register",
