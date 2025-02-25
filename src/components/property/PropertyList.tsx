@@ -47,6 +47,7 @@ const PropertyList: React.FC<PropertyListProps> = ({ propertiesData, onDeletePro
 		<ul className="table-container">
 			{propertyComponents}
 		</ul>
+
 	)
 }
 
