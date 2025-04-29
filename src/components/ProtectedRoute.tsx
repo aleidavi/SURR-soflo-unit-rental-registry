@@ -16,7 +16,8 @@ function ProtectedRoute({ children }: ProtectedRouteProps): JSX.Element {
 
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
     useEffect(() => {
-        auth().catch(() => setIsAuthorized(false))}, []
+        auth().catch(() => setIsAuthorized(false))}, 
+        []
     );
 
 
