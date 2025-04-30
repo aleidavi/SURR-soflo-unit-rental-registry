@@ -68,5 +68,6 @@ if (isAuthorized === null) {
 else {
     return isAuthorized ? children : <Navigate to="/login" />;
 }
+}
 
 export default ProtectedRoute;

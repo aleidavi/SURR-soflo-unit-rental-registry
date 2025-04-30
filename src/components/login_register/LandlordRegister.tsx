@@ -1,5 +1,7 @@
 
 import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {ACCESS_TOKEN, REFRESH_TOKEN} from '../../constants';
 import { Nav } from 'react-bootstrap';
 import './LandlordRegister.css';
 
@@ -38,6 +40,24 @@ const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
 		handleRegistrationSubmit(formData);
 		setFormData(kDefaultFormState);
 	}
+
+	// New Form Function for Landlord Registration:
+	function Form ({route, method}) {
+		const [formData, setFormData] = useState({
+			username: '',
+			password: '',
+			firstName: '',
+			lastName: '',
+			businessName: '',
+			phoneNumber: '',
+			email: '',
+			mailingAddress: ''
+		});
+
+		
+
+	}
+	// New Form Function for Landlord Registration ends here.
 
 	return (
 		<div className='addLandlord'>
