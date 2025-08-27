@@ -5,20 +5,20 @@ import api from './api';
 import {REFRESH_TOKEN, ACCESS_TOKEN} from './constants';
 import {useState, useEffect} from 'react';
 
+// wrap something in a protexted route before
+// accessing the Access Token to access the route
 
 interface ProtectedRouteProps {
-    children: React.ReactNode;
+    children: React.ReactElement | null;
 }
 
-function ProtectedRoute({ children }: ProtectedRouteProps): JSX.Element {
+function ProtectedRoute({ children }: ProtectedRouteProps): JSX.Element | null {
 
     // Front end protection for users to access the protected routes
 
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
     useEffect(() => {
-        auth().catch(() => setIsAuthorized(false))}, 
-        []
-    );
+        auth().catch(() => setIsAuthorized(false))}, [])
 
 
     const refreshToken = async (): Promise<void> => {
@@ -42,7 +42,7 @@ function ProtectedRoute({ children }: ProtectedRouteProps): JSX.Element {
             console.log(error)
             setIsAuthorized(false);
         }
-    }
+    };
 
     // Check for access token expiration and refresh if needed
 const auth = async (): Promise<void> => {
@@ -60,7 +60,7 @@ const auth = async (): Promise<void> => {
     } else {
         setIsAuthorized(true);
     }
-}
+};
 
 if (isAuthorized === null) {
     return <div>Loading...</div>;

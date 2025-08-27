@@ -46,7 +46,7 @@ const LandlordRegister: React.FC<Props> = ({ handleRegistrationSubmit }) => {
 		const [formData, setFormData] = useState({
 			username: '',
 			password: '',
-			firstName: '',
+			firstName: '',-
 			lastName: '',
 			businessName: '',
 			phoneNumber: '',

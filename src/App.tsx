@@ -6,7 +6,7 @@ import LandlordLogin from './components/login_register/LandlordLogin';
 import NotFound from './components/NotFound';
 import Home from './components/home_page/Home';
 
-import { BrowserRouter, Routes, Route, Navigation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import axios from 'axios';
@@ -18,7 +18,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // for logout 
 function Logout(){
-	localStorage.clear();
+	localStorage.clear(); // to clear prev access tokens lingering - security
 	return <Navigate to="/login" />;
 }
 
