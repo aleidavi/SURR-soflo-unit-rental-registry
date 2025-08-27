@@ -13,23 +13,17 @@ import axios from 'axios';
 import Landlord from './components/landlord/Landlord';
 import ProtectedRoute from './components/ProtectedRoute';
 
-
-
-
 // for logout 
 function Logout(){
 	localStorage.clear(); // to clear prev access tokens lingering - security
 	return <Navigate to="/login" />;
 }
 
-// for Registering and Logging out
-// 
+
 function RegisterAndLogout() {
 	localStorage.clear();
 	return <LandlordRegister />;
 }
-
-
 
 function App() {
 
@@ -44,22 +38,14 @@ function App() {
 						<ProtectedRoute>
 							<Home />
 						</ProtectedRoute>
-						
 						}
-
 				/>
 				<Route path="/login" element={<LandlordLogin />} />
 				<Route path="/logout" element={<Logout />} />
 				<Route path="/register" element={<RegisterAndLogout/>} />
 				<Route path="*" element={<NotFound />} />
-
 			</Routes>
-		
-		
 		</BrowserRouter>
-
-		
-		
 	)
 
 
